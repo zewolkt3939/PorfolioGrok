@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HTB Sample Linux Machine write-up template — Nguyễn Trường Bảo" />
+  <title>HTB — Sample Linux Machine | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">HTB Write-up</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">HTB machine write-up template — replace with your notes.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc">SOC</a>
+        <a href="../index.html?cat=htb" class="is-active">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=htb">← Back to HTB</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-htb">HTB</span>
+          <span class="diff-badge diff-easy">Easy</span>
+          <time datetime="2026-03-15">Mar 15, 2026</time>
+        </div>
+        <h1 class="writeup-title">Sample Linux Machine (Template)</h1>
+        <p class="writeup-lead">
+          Methodology-focused template for a retired HTB Linux box: Nmap → web foothold →
+          privilege escalation. <strong>Replace every placeholder with your own work.</strong>
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Linux</span>
+          <span class="tag tag-sm">Nmap</span>
+          <span class="tag tag-sm">PrivEsc</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#lab-info">Lab info</a></li>
+          <li><a href="#enumeration">Enumeration</a></li>
+          <li><a href="#foothold">Foothold</a></li>
+          <li><a href="#privesc">Privilege escalation</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+      </nav>
+
+      <section id="overview" class="writeup-section">
+        <h2>Overview</h2>
+        <p>
+          <!-- PLACEHOLDER -->
+          Summarize the box in 2–3 sentences: primary service, vulnerability class, and how you got root.
+        </p>
+        <div class="attack-path">
+          <span>Recon</span><span class="ap-arrow">→</span>
+          <span>Web foothold</span><span class="ap-arrow">→</span>
+          <span>User shell</span><span class="ap-arrow">→</span>
+          <span>Root</span>
+        </div>
+        <figure class="writeup-figure">
+          <div class="img-placeholder" role="img" aria-label="Screenshot placeholder">
+            📷 Add your HTB card / proof screenshot<br />
+            <code>&lt;img src="../../assets/writeups/htb-sample-overview.png" alt="Machine overview" /&gt;</code>
+          </div>
+          <figcaption>Figure 1 — Machine overview (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="lab-info" class="writeup-section">
+        <h2>Lab info</h2>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <tbody>
+              <tr><th>Platform</th><td>Hack The Box</td></tr>
+              <tr><th>Name</th><td><!-- e.g. Lame / Bashed / ... --></td></tr>
+              <tr><th>OS</th><td>Linux</td></tr>
+              <tr><th>Difficulty</th><td>Easy</td></tr>
+              <tr><th>IP</th><td><code><!-- 10.10.x.x --></code></td></tr>
+              <tr><th>Skills</th><td>Enumeration, Web, Linux PrivEsc</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="enumeration" class="writeup-section">
+        <h2>Enumeration</h2>
+        <h3>Port scan</h3>
+        <pre class="code-block"><code># PLACEHOLDER — paste your scan
+sudo nmap -sC -sV -oA nmap/initial 10.10.x.x
+
+# Expected style of notes (example structure only):
+# 22/tcp   open  ssh
+# 80/tcp   open  http
+# 445/tcp  open  smb</code></pre>
+        <h3>Web / service notes</h3>
+        <ul>
+          <li><!-- What directories / vhosts did you find? --></li>
+          <li><!-- Any default creds, interesting headers, tech stack? --></li>
+        </ul>
+        <figure class="writeup-figure">
+          <div class="img-placeholder">📷 Gobuster / browser screenshot placeholder</div>
+          <figcaption>Figure 2 — Web enumeration (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="foothold" class="writeup-section">
+        <h2>Foothold</h2>
+        <p><!-- PLACEHOLDER: exploit path to reverse shell / web shell --></p>
+        <pre class="code-block"><code># PLACEHOLDER
+# curl / searchsploit / burp steps ...
+# nc -lvnp 4444</code></pre>
+        <div class="callout callout-warn">
+          <strong>Ethics:</strong> Only attack machines you own or have explicit permission to test (HTB VPN, lab scope).
+        </div>
+      </section>
+
+      <section id="privesc" class="writeup-section">
+        <h2>Privilege escalation</h2>
+        <p><!-- PLACEHOLDER: linpeas highlights, sudo -l, SUID, cron, kernel, etc. --></p>
+        <pre class="code-block"><code># PLACEHOLDER
+find / -perm -4000 2>/dev/null
+sudo -l
+# ... exploit steps ...
+cat /root/root.txt</code></pre>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- What took the most time? --></li>
+          <li><!-- Checklist item to reuse next box --></li>
+          <li><!-- Blue-team detection idea (optional) --></li>
+        </ul>
+      </section>
+
+      <section id="references" class="writeup-section">
+        <h2>References</h2>
+        <ul>
+          <li><a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a></li>
+          <li><a href="https://book.hacktricks.xyz/" target="_blank" rel="noopener noreferrer">HackTricks</a></li>
+          <li><!-- Official machine page / CVE / blog --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=htb">← Back to HTB</a>
+        <p class="writeup-disclaimer">Template only — original content by you.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

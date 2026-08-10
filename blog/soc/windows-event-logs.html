@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SOC notes — Windows Event Logs template" />
+  <title>SOC — Windows Event Logs & Finding Evil | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">SOC Notes</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">Blue-team notes template for Windows logging.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc" class="is-active">SOC</a>
+        <a href="../index.html?cat=htb">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=soc">← Back to SOC</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-soc">SOC</span>
+          <span class="diff-badge diff-notes">Notes</span>
+          <time datetime="2026-03-01">Mar 1, 2026</time>
+        </div>
+        <h1 class="writeup-title">Windows Event Logs &amp; Finding Evil</h1>
+        <p class="writeup-lead">
+          Living notes template: core log channels, high-value Event IDs, and a simple investigation flow
+          for SOC-style triage. Add screenshots from <em>your</em> lab (HTB Academy SOC, home SIEM, etc.).
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Windows</span>
+          <span class="tag tag-sm">Event Logs</span>
+          <span class="tag tag-sm">Blue Team</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#channels">Log channels</a></li>
+          <li><a href="#event-ids">Useful Event IDs</a></li>
+          <li><a href="#workflow">Investigation workflow</a></li>
+          <li><a href="#lab">Lab exercises</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+      </nav>
+
+      <section id="channels" class="writeup-section">
+        <h2>Log channels</h2>
+        <p>Default Windows channels you will open first during triage:</p>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <thead>
+              <tr><th>Channel</th><th>What it covers</th><th>Your notes</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Security</td>
+                <td>Logon, account changes, process creation (if audit enabled)</td>
+                <td><!-- ... --></td>
+              </tr>
+              <tr>
+                <td>System</td>
+                <td>Service installs, driver issues, reboots</td>
+                <td><!-- ... --></td>
+              </tr>
+              <tr>
+                <td>Application</td>
+                <td>App-level errors / custom sources</td>
+                <td><!-- ... --></td>
+              </tr>
+              <tr>
+                <td>PowerShell / Sysmon</td>
+                <td>Script blocks, network, process tree (if deployed)</td>
+                <td><!-- ... --></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="event-ids" class="writeup-section">
+        <h2>Useful Event IDs</h2>
+        <p><!-- PLACEHOLDER: expand as you study modules --></p>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <thead>
+              <tr><th>ID</th><th>Meaning</th><th>Why it matters</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>4624</code></td><td>Successful logon</td><td><!-- type 3/10 notes --></td></tr>
+              <tr><td><code>4625</code></td><td>Failed logon</td><td><!-- spray / brute --></td></tr>
+              <tr><td><code>4688</code></td><td>Process creation</td><td><!-- needs audit policy --></td></tr>
+              <tr><td><code>7045</code></td><td>Service installed</td><td><!-- persistence --></td></tr>
+              <tr><td><code><!-- ... --></code></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="workflow" class="writeup-section">
+        <h2>Investigation workflow</h2>
+        <ol class="numbered-steps">
+          <li><strong>Scope</strong> — host, time window, user/IP from the alert.</li>
+          <li><strong>Timeline</strong> — pivot Event Viewer / SIEM around first bad signal.</li>
+          <li><strong>Process / logon chain</strong> — who ran what, from where.</li>
+          <li><strong>Persistence &amp; egress</strong> — services, tasks, unusual network.</li>
+          <li><strong>Document</strong> — IOC list + recommended containment.</li>
+        </ol>
+        <figure class="writeup-figure">
+          <div class="img-placeholder">📷 Event Viewer / SIEM timeline screenshot</div>
+          <figcaption>Figure — investigation timeline (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="lab" class="writeup-section">
+        <h2>Lab exercises</h2>
+        <p><!-- Link your HTB SOC / THM rooms completed for this topic --></p>
+        <pre class="code-block"><code># PowerShell examples (fill from your lab)
+Get-WinEvent -FilterHashtable @{LogName='Security'; Id=4625} -MaxEvents 20
+# wevtutil / Get-WinEvent queries you actually used...</code></pre>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Audit policy gaps that hid useful events --></li>
+          <li><!-- Noise vs signal for a specific ID --></li>
+        </ul>
+      </section>
+
+      <section id="references" class="writeup-section">
+        <h2>References</h2>
+        <ul>
+          <li><a href="https://learn.microsoft.com/en-us/windows/security/threat-protection/auditing/event-4624" target="_blank" rel="noopener noreferrer">MS Learn — Event 4624</a></li>
+          <li><!-- MITRE technique, Academy module, personal cheatsheet --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=soc">← Back to SOC</a>
+        <p class="writeup-disclaimer">Template only — your SOC notes go here.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

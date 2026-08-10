@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Footprinting methodology overview checklist" />
+  <title>Footprinting — Methodology Overview | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">Footprinting</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">Living recon checklist — expand as you study.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc">SOC</a>
+        <a href="../index.html?cat=htb">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting" class="is-active">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=footprinting">← Back to Footprinting</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-footprinting">Footprinting</span>
+          <span class="diff-badge diff-notes">Notes</span>
+          <time datetime="2026-01-05">Jan 5, 2026</time>
+        </div>
+        <h1 class="writeup-title">Methodology Overview</h1>
+        <p class="writeup-lead">
+          Structured recon checklist from passive OSINT to active service enumeration.
+          Tick items off as you practice Academy modules and labs.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Recon</span>
+          <span class="tag tag-sm">OSINT</span>
+          <span class="tag tag-sm">Checklist</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#passive">Passive footprinting</a></li>
+          <li><a href="#active">Active footprinting</a></li>
+          <li><a href="#services">Service checklist</a></li>
+          <li><a href="#output">How I document</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+        </ol>
+      </nav>
+
+      <section id="passive" class="writeup-section">
+        <h2>Passive footprinting</h2>
+        <ul class="checklist">
+          <li><!-- [ ] WHOIS / RDAP --></li>
+          <li><!-- [ ] DNS history / certificate transparency --></li>
+          <li><!-- [ ] Search engines / job posts / GitHub leaks --></li>
+          <li><!-- [ ] Social / breach data (legal sources only) --></li>
+        </ul>
+        <pre class="code-block"><code># Tools you use (examples to replace)
+# whois, dig, crt.sh, theHarvester, ...</code></pre>
+      </section>
+
+      <section id="active" class="writeup-section">
+        <h2>Active footprinting</h2>
+        <ul class="checklist">
+          <li><!-- [ ] Host discovery --></li>
+          <li><!-- [ ] Port / service scan --></li>
+          <li><!-- [ ] Banner grabbing --></li>
+          <li><!-- [ ] Authenticated enum (if in scope) --></li>
+        </ul>
+        <pre class="code-block"><code>nmap -sn &lt;range&gt;
+nmap -sC -sV -p- -oA full &lt;host&gt;
+# masscan / rustscan notes if you use them...</code></pre>
+      </section>
+
+      <section id="services" class="writeup-section">
+        <h2>Service checklist</h2>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <thead>
+              <tr><th>Service</th><th>Ports</th><th>Go-to tools</th><th>Your notes</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>DNS</td><td>53</td><td>dig, dnsenum</td><td></td></tr>
+              <tr><td>SMB</td><td>445</td><td>smbclient, enum4linux-ng</td><td></td></tr>
+              <tr><td>SNMP</td><td>161</td><td>snmpwalk, onesixtyone</td><td></td></tr>
+              <tr><td>SMTP</td><td>25/587</td><td>smtp-user-enum</td><td></td></tr>
+              <tr><td>HTTP(S)</td><td>80/443</td><td>curl, ffuf, whatweb</td><td></td></tr>
+              <tr><td><!-- ... --></td><td></td><td></td><td></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="output" class="writeup-section">
+        <h2>How I document</h2>
+        <ol class="numbered-steps">
+          <li>Target sheet (IPs, domains, creds in scope)</li>
+          <li>Raw tool output in dated folders</li>
+          <li>Short Markdown summary (this site)</li>
+          <li>Open questions / next pivots</li>
+        </ol>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Passive first when stealth matters --></li>
+          <li><!-- Always note tool versions / wordlists --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=footprinting">← Back to Footprinting</a>
+        <p class="writeup-disclaimer">Living document — expand with your own recon habits.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

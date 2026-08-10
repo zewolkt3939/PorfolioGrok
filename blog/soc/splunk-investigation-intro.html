@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SOC — Splunk investigation intro template" />
+  <title>SOC — Log Investigation with Splunk (Intro) | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">SOC · Splunk</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">SPL cheatsheet + investigation template for SOC labs.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc" class="is-active">SOC</a>
+        <a href="../index.html?cat=htb">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=soc">← Back to SOC</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-soc">SOC</span>
+          <span class="diff-badge diff-notes">Notes</span>
+          <time datetime="2026-02-10">Feb 10, 2026</time>
+        </div>
+        <h1 class="writeup-title">Log Investigation with Splunk (Intro)</h1>
+        <p class="writeup-lead">
+          Intro template for searching logs with SPL: scoping time, narrowing fields, and building a short case narrative.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Splunk</span>
+          <span class="tag tag-sm">SPL</span>
+          <span class="tag tag-sm">SIEM</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#scenario">Scenario</a></li>
+          <li><a href="#spl-basics">SPL basics</a></li>
+          <li><a href="#investigation">Investigation steps</a></li>
+          <li><a href="#iocs">IOCs</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+        </ol>
+      </nav>
+
+      <section id="scenario" class="writeup-section">
+        <h2>Scenario</h2>
+        <p><!-- PLACEHOLDER: alert description, index/sourcetype, time range --></p>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <tbody>
+              <tr><th>Index</th><td><code><!-- main / wineventlog --></code></td></tr>
+              <tr><th>Sourcetype</th><td><code><!-- ... --></code></td></tr>
+              <tr><th>Time range</th><td><!-- last 24h / custom --></td></tr>
+              <tr><th>Hypothesis</th><td><!-- brute force / phishing click / ... --></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="spl-basics" class="writeup-section">
+        <h2>SPL basics (cheat sheet)</h2>
+        <pre class="code-block"><code># PLACEHOLDER — replace with queries you actually ran
+index=... sourcetype=... "failed"
+| stats count by src_ip user
+| sort -count
+
+index=... user="jdoe"
+| table _time host user src_ip action
+| sort _time
+
+# Useful commands to practice: stats, timechart, rex, eval, transaction</code></pre>
+      </section>
+
+      <section id="investigation" class="writeup-section">
+        <h2>Investigation steps</h2>
+        <ol class="numbered-steps">
+          <li><!-- Confirm alert fidelity --></li>
+          <li><!-- Pivot on user / IP / host --></li>
+          <li><!-- Check success after failures --></li>
+          <li><!-- Lateral movement / rare processes --></li>
+          <li><!-- Write conclusion + severity --></li>
+        </ol>
+        <figure class="writeup-figure">
+          <div class="img-placeholder">📷 Splunk search / dashboard screenshot</div>
+          <figcaption>Figure — SPL results (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="iocs" class="writeup-section">
+        <h2>IOCs</h2>
+        <ul>
+          <li>IP: <code><!-- x.x.x.x --></code></li>
+          <li>User: <code><!-- ... --></code></li>
+          <li>Hash / URL: <code><!-- ... --></code></li>
+        </ul>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Field extractions that saved time --></li>
+          <li><!-- False positive pattern --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=soc">← Back to SOC</a>
+        <p class="writeup-disclaimer">Template only — use your own SPL and screenshots.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

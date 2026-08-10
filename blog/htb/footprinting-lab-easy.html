@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HTB Academy Footprinting Lab Easy — notes template" />
+  <title>HTB Academy — Footprinting Lab (Easy) | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">HTB Academy</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">Academy lab notes — footprinting checklist style.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc">SOC</a>
+        <a href="../index.html?cat=htb" class="is-active">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=htb">← Back to HTB</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-htb">HTB</span>
+          <span class="diff-badge diff-easy">Easy</span>
+          <time datetime="2026-02-20">Feb 20, 2026</time>
+        </div>
+        <h1 class="writeup-title">Footprinting Lab (Easy) — Academy Notes</h1>
+        <p class="writeup-lead">
+          Checklist-style template for HTB Academy footprinting: DNS, email, SMB, SNMP, and databases.
+          Fill answers and commands from <em>your</em> lab session only.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Footprinting</span>
+          <span class="tag tag-sm">Recon</span>
+          <span class="tag tag-sm">Academy</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#objectives">Objectives</a></li>
+          <li><a href="#dns">DNS</a></li>
+          <li><a href="#smb">SMB / shares</a></li>
+          <li><a href="#snmp">SNMP</a></li>
+          <li><a href="#other">Other services</a></li>
+          <li><a href="#flags">Flags / answers</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+        </ol>
+      </nav>
+
+      <section id="objectives" class="writeup-section">
+        <h2>Objectives</h2>
+        <ul>
+          <li><!-- What the module asked you to discover --></li>
+          <li><!-- Target IP / domain provided by Academy --></li>
+        </ul>
+      </section>
+
+      <section id="dns" class="writeup-section">
+        <h2>DNS</h2>
+        <pre class="code-block"><code># PLACEHOLDER
+dig axfr @&lt;ns&gt; &lt;domain&gt;
+dig any &lt;domain&gt; @&lt;ns&gt;
+nslookup -type=TXT &lt;domain&gt;</code></pre>
+        <p><strong>Findings:</strong> <!-- zone transfers? hosts? mail records? --></p>
+      </section>
+
+      <section id="smb" class="writeup-section">
+        <h2>SMB / shares</h2>
+        <pre class="code-block"><code># PLACEHOLDER
+nmap --script smb-enum-shares,smb-enum-users -p 445 &lt;ip&gt;
+smbclient -L //&lt;ip&gt; -N
+enum4linux-ng &lt;ip&gt;</code></pre>
+        <p><strong>Findings:</strong> <!-- interesting shares, null session, users --></p>
+      </section>
+
+      <section id="snmp" class="writeup-section">
+        <h2>SNMP</h2>
+        <pre class="code-block"><code># PLACEHOLDER
+snmpwalk -v2c -c public &lt;ip&gt;
+onesixtyone -c community.txt &lt;ip&gt;</code></pre>
+      </section>
+
+      <section id="other" class="writeup-section">
+        <h2>Other services</h2>
+        <p><!-- FTP, SMTP, NFS, SQL, ... — one subsection per service you touch --></p>
+      </section>
+
+      <section id="flags" class="writeup-section">
+        <h2>Flags / answers</h2>
+        <div class="callout callout-warn">
+          <strong>Tip:</strong> Prefer describing <em>how</em> you found the answer. Avoid dumping Academy flags if your portfolio is public and policy forbids it.
+        </div>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <thead>
+              <tr><th>Question</th><th>Approach</th><th>Answer (optional)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><!-- Q1 --></td>
+                <td><!-- dig / nmap ... --></td>
+                <td><code><!-- ... --></code></td>
+              </tr>
+              <tr>
+                <td><!-- Q2 --></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Protocol you want to practice more --></li>
+          <li><!-- Tool aliases worth keeping --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=htb">← Back to HTB</a>
+        <p class="writeup-disclaimer">Template only — fill with your Academy session notes.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

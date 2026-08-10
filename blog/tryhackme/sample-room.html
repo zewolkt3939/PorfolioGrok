@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TryHackMe sample room write-up template" />
+  <title>TryHackMe — Sample Room | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">TryHackMe</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">TryHackMe room template — fill with your walkthrough.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc">SOC</a>
+        <a href="../index.html?cat=htb">HTB</a>
+        <a href="../index.html?cat=tryhackme" class="is-active">TryHackMe</a>
+        <a href="../index.html?cat=ad">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=tryhackme">← Back to TryHackMe</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-tryhackme">TryHackMe</span>
+          <span class="diff-badge diff-easy">Easy</span>
+          <time datetime="2026-02-28">Feb 28, 2026</time>
+        </div>
+        <h1 class="writeup-title">Sample Room Write-up</h1>
+        <p class="writeup-lead">
+          Generic THM room template: tasks, enumeration, and answers structure.
+          Rename the file (e.g. <code>tempest.html</code>) when you write a real room.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">THM</span>
+          <span class="tag tag-sm">Web</span>
+          <span class="tag tag-sm">Beginner</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#room-info">Room info</a></li>
+          <li><a href="#task1">Task 1 — Setup</a></li>
+          <li><a href="#task2">Task 2 — Enumeration</a></li>
+          <li><a href="#task3">Task 3 — Exploitation</a></li>
+          <li><a href="#flags">Flags</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+        </ol>
+      </nav>
+
+      <section id="room-info" class="writeup-section">
+        <h2>Room info</h2>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <tbody>
+              <tr><th>Room</th><td><!-- Official name + link --></td></tr>
+              <tr><th>Path</th><td><!-- Pre-Security / SOC L1 / Offensive --></td></tr>
+              <tr><th>Difficulty</th><td>Easy</td></tr>
+              <tr><th>Topics</th><td><!-- HTTP, logs, malware, ... --></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="task1" class="writeup-section">
+        <h2>Task 1 — Setup</h2>
+        <p><!-- VPN / AttackBox / deploy machine --></p>
+        <pre class="code-block"><code># PLACEHOLDER
+ping &lt;machine-ip&gt;
+# connectivity notes...</code></pre>
+      </section>
+
+      <section id="task2" class="writeup-section">
+        <h2>Task 2 — Enumeration</h2>
+        <p><!-- What you scanned and why --></p>
+        <pre class="code-block"><code>nmap -sC -sV &lt;ip&gt;
+# gobuster / ffuf / browser notes...</code></pre>
+        <figure class="writeup-figure">
+          <div class="img-placeholder">📷 Room task / browser screenshot</div>
+          <figcaption>Figure — enumeration (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="task3" class="writeup-section">
+        <h2>Task 3 — Exploitation / Analysis</h2>
+        <p><!-- For offensive rooms: exploit. For SOC rooms: log/PCAP analysis. --></p>
+        <pre class="code-block"><code># PLACEHOLDER commands / queries</code></pre>
+      </section>
+
+      <section id="flags" class="writeup-section">
+        <h2>Flags</h2>
+        <div class="callout callout-info">
+          For public portfolios, consider showing <strong>methodology only</strong> and keeping flags private.
+        </div>
+        <ul>
+          <li>User flag: <code><!-- ... --></code></li>
+          <li>Root flag: <code><!-- ... --></code></li>
+        </ul>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Key takeaway --></li>
+          <li><!-- Related room to do next --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=tryhackme">← Back to TryHackMe</a>
+        <p class="writeup-disclaimer">Template only — original room notes by you.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

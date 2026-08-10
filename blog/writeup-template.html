@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- PLACEHOLDER: mô tả SEO -->
+  <meta name="description" content="Write-up: [TITLE] — Nguyễn Trường Bảo Cybersecurity Portfolio" />
+  <!-- PLACEHOLDER: tiêu đề trang -->
+  <title>[TITLE] | Write-ups</title>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Adjust path depth: from blog/root use ../style.css; from blog/htb/ use ../../style.css -->
+  <link rel="stylesheet" href="../style.css" />
+
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("portfolio-theme");
+        if (!t) {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body class="page-writeup">
+  <header class="mobile-header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu" aria-expanded="false">
+      <span class="hamburger"></span>
+    </button>
+    <span class="mobile-title">Write-ups</span>
+    <button class="theme-toggle mobile-theme" id="themeToggleMobile" aria-label="Chuyển dark/light mode"></button>
+  </header>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-inner">
+      <div class="avatar-wrap">
+        <img
+          class="avatar"
+          src="https://api.dicebear.com/9.x/shapes/svg?seed=NguyenTruongBao&backgroundColor=0f1115"
+          alt="Avatar"
+          width="140"
+          height="140"
+        />
+      </div>
+      <h1 class="sidebar-name">Nguyễn Trường Bảo</h1>
+      <p class="sidebar-title">Cybersecurity × AI Engineer</p>
+      <p class="sidebar-bio">Lab notes &amp; write-ups — fill this template with your own work.</p>
+
+      <nav class="sidebar-nav" aria-label="Main navigation">
+        <!-- From blog/ root: ../index.html ; from blog/htb/: ../../index.html -->
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="../index.html#skills" class="nav-link">Skills</a>
+        <a href="../index.html#certifications" class="nav-link">Certifications</a>
+        <a href="index.html" class="nav-link active">Write-ups</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <nav class="blog-side-cats" aria-label="Blog categories">
+        <p class="blog-side-cats-title">Categories</p>
+        <a href="index.html?cat=all">All</a>
+        <a href="index.html?cat=soc">SOC</a>
+        <a href="index.html?cat=htb">HTB</a>
+        <a href="index.html?cat=tryhackme">TryHackMe</a>
+        <a href="index.html?cat=ad">AD</a>
+        <a href="index.html?cat=footprinting">Footprinting</a>
+      </nav>
+
+      <button class="theme-toggle sidebar-theme" id="themeToggle" aria-label="Chuyển dark/light mode">
+        <span class="theme-icon" aria-hidden="true"></span>
+        <span class="theme-label">Dark mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content writeup-main">
+    <article class="writeup-article">
+      <a class="writeup-back" href="index.html">← Back to Write-ups</a>
+
+      <header class="writeup-header">
+        <div class="writeup-meta-row">
+          <!-- PLACEHOLDER: category class: cat-soc | cat-htb | cat-tryhackme | cat-ad | cat-footprinting -->
+          <span class="cat-badge cat-htb">HTB</span>
+          <span class="diff-badge diff-easy">Easy</span>
+          <time datetime="2026-01-01">Jan 1, 2026</time>
+        </div>
+        <!-- PLACEHOLDER: title -->
+        <h1 class="writeup-title">[Machine / Room / Module Title]</h1>
+        <p class="writeup-lead">
+          <!-- PLACEHOLDER: 1–2 sentence summary -->
+          Short summary of what you solved and the main attack path or investigation outcome.
+        </p>
+        <div class="post-tags writeup-tags">
+          <span class="tag tag-sm">Tag1</span>
+          <span class="tag tag-sm">Tag2</span>
+          <span class="tag tag-sm">Tag3</span>
+        </div>
+      </header>
+
+      <nav class="writeup-toc" aria-label="Table of contents">
+        <p class="writeup-toc-title">Contents</p>
+        <ol>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#lab-info">Lab info</a></li>
+          <li><a href="#enumeration">Enumeration</a></li>
+          <li><a href="#exploitation">Exploitation / Analysis</a></li>
+          <li><a href="#privesc">Privilege Escalation / Next steps</a></li>
+          <li><a href="#lessons">Lessons learned</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+      </nav>
+
+      <section id="overview" class="writeup-section">
+        <h2>Overview</h2>
+        <p>
+          <!-- PLACEHOLDER -->
+          Describe the target, difficulty, and high-level path (e.g. web RCE → user → root via SUID).
+        </p>
+        <!-- Image placeholder — replace src with your screenshot -->
+        <figure class="writeup-figure">
+          <div class="img-placeholder" role="img" aria-label="Screenshot placeholder">
+            📷 Screenshot placeholder — replace with your image<br />
+            <code>&lt;img src="../../assets/writeups/your-shot.png" alt="..." /&gt;</code>
+          </div>
+          <figcaption>Figure: Overview / landing page</figcaption>
+        </figure>
+      </section>
+
+      <section id="lab-info" class="writeup-section">
+        <h2>Lab info</h2>
+        <div class="table-wrap">
+          <table class="writeup-table">
+            <tbody>
+              <tr><th>Platform</th><td><!-- e.g. Hack The Box --></td></tr>
+              <tr><th>Name</th><td><!-- Machine / Room --></td></tr>
+              <tr><th>OS</th><td><!-- Linux / Windows --></td></tr>
+              <tr><th>Difficulty</th><td><!-- Easy / Medium / Hard --></td></tr>
+              <tr><th>IP / Target</th><td><code><!-- 10.10.x.x --></code></td></tr>
+              <tr><th>Skills</th><td><!-- Web, PrivEsc, ... --></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="enumeration" class="writeup-section">
+        <h2>Enumeration</h2>
+        <p><!-- PLACEHOLDER: what you scanned and what stood out --></p>
+        <h3>Port scan</h3>
+        <pre class="code-block"><code># PLACEHOLDER — paste your commands &amp; trimmed output
+nmap -sC -sV -oA nmap/initial 10.10.x.x</code></pre>
+        <h3>Interesting services</h3>
+        <ul>
+          <li><!-- Port / service / notes --></li>
+          <li><!-- ... --></li>
+        </ul>
+      </section>
+
+      <section id="exploitation" class="writeup-section">
+        <h2>Exploitation / Analysis</h2>
+        <p><!-- PLACEHOLDER: foothold, alert triage, or key finding --></p>
+        <pre class="code-block"><code># PLACEHOLDER
+# your exploit / query / payload here</code></pre>
+        <div class="callout callout-info">
+          <strong>Note:</strong> Prefer your own screenshots and commands. Do not copy full write-ups from others.
+        </div>
+      </section>
+
+      <section id="privesc" class="writeup-section">
+        <h2>Privilege Escalation / Next steps</h2>
+        <p><!-- PLACEHOLDER: root path, lateral movement, or remediation --></p>
+        <pre class="code-block"><code># PLACEHOLDER</code></pre>
+      </section>
+
+      <section id="lessons" class="writeup-section">
+        <h2>Lessons learned</h2>
+        <ul>
+          <li><!-- What would you do faster next time? --></li>
+          <li><!-- Detection / hardening angle --></li>
+          <li><!-- Tools worth remembering --></li>
+        </ul>
+      </section>
+
+      <section id="references" class="writeup-section">
+        <h2>References</h2>
+        <ul>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Official room / machine page</a></li>
+          <li><a href="#" target="_blank" rel="noopener noreferrer">Tool docs / MITRE technique</a></li>
+        </ul>
+      </section>
+
+      <footer class="writeup-footer">
+        <a class="writeup-back" href="index.html">← Back to Write-ups</a>
+        <p class="writeup-disclaimer">
+          Template only — replace all placeholders with your original notes.
+        </p>
+      </footer>
+    </article>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Nguyễn Trường Bảo · Cybersecurity × AI Engineer.</p>
+    </footer>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
